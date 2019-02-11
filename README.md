@@ -23,4 +23,5 @@ To install the environment please follow the instruction on [MLPerf-training sin
    python train.py --device-ids 0 1 2 3 4 5 6 7 --image_size 1600 1200
    ```
    
-   
+  
+To resume training please use the ```--checkpoint``` flag so you can load your pre-trained 300x300 models and check results on a larger image size. 
