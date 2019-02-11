@@ -11,7 +11,9 @@ To install the environment please follow the instruction on [MLPerf-training sin
 
 ## Experiments (TO DO):
 1. Train 1400x1400 images on 8 GPUs with batch of 32 with the diffult anchors 
-   '''python train.py --device-ids 0 1 2 3 4 5 6 7'''
+   '''
+   python train.py --device-ids 0 1 2 3 4 5 6 7
+   '''
 2. Train of 1400x1400 with smaller feature maps size by changing the strides - this would results with less anchors.
    '''python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 4 4 2 2 2 1 '''
 3. Train on images of size 1600x1200 
