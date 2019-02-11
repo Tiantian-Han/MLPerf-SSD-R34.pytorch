@@ -15,8 +15,12 @@ To install the environment please follow the instruction on [MLPerf-training sin
    python train.py --device-ids 0 1 2 3 4 5 6 7
    ```
 2. Train of 1400x1400 with smaller feature maps size by changing the strides - this would results with less anchors.
-   ```python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 4 4 2 2 2 1 ```
+   ```
+   python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 4 4 2 2 2 1
+   ```
 3. Train on images of size 1600x1200 
-   ```python train.py --device-ids 0 1 2 3 4 5 6 7 --image_size 1600 1200 ```
+   ```
+   python train.py --device-ids 0 1 2 3 4 5 6 7 --image_size 1600 1200
+   ```
    
    
