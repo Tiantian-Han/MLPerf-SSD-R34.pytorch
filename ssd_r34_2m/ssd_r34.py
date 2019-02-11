@@ -139,6 +139,5 @@ class SSD_R34(nn.Module):
         src = [*layers, *additional_results]
         # Feature maps sizes depend on the image size. For 300x300 it is 38x38x4, 19x19x6, 10x10x6, 5x5x6, 3x3x4, 1x1x4
         locs, confs,features_shapes = self.bbox_view(src, self.loc, self.conf,extract_shapes=extract_shapes)
-        #import pdb; pdb.set_trace()
         # For SSD 300, shall return nbatch x 8732 x {nlabels, nlocs} results
         return locs, confs,features_shapes
