@@ -1,7 +1,7 @@
 # MLPerf_SSD-R34-Large
 SSD on Large images with a backbone of ResNet34 based on MLPerf-training single-stage-detector repo 
 ##Installation
-To install the environment please follow the instruction on [MLPerf-training single-stage-detector](https://github.com/mlperf/training/tree/master/single_stage_detector)
+To install the environment please follow the instruction on [MLPerf-training single-stage-detector](https://github.com/mlperf/training/tree/master/single_stage_detector). The files in this repo replace the files in the ssd folder.
 
 ## Changes from original repo:
 1. Support training on any data size including images with uneven ratio e.g 1600x1200
@@ -18,7 +18,7 @@ To install the environment please follow the instruction on [MLPerf-training sin
    ```
    python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 4 4 2 2 2 1
    ```
-3. Train on images of size 1600x1200 
+3. Train on images of size 1600x1200 (asspect ratio would need to be adjusted - line 101 in train.py)
    ```
    python train.py --device-ids 0 1 2 3 4 5 6 7 --image_size 1600 1200
    ```
