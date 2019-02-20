@@ -93,8 +93,8 @@ def get_scales(min_scale=0.2, max_scale=0.9,num_layers=6):
     return scales
 
 def dboxes_coco(figsize,strides):
-    ssd_r34=SSD_R34(81,strides=strides)
-    synt_img=torch.rand([1,3]+figsize)
+    ssd_r34=SSD_R34(81,strides=strides).to('cuda')
+    synt_img=torch.rand([1,3]+figsize).to('cuda')
     _,_,feat_size =ssd_r34(synt_img, extract_shapes = True)
     steps=[(int(figsize[0]/fs[0]),int(figsize[1]/fs[1])) for fs in feat_size]
     scales = [(int(s*figsize[0]/300),int(s*figsize[1]/300)) for s in [21, 45, 99, 153, 207, 261, 315]] 
@@ -223,7 +223,7 @@ def train_mlperf_coco(args):
 
 
             img = Variable(img, requires_grad=True)
-            ploc, plabel,_ = ssd_r34(img)
+            ploc, plabel,_ = ssd_r34(img.to('cuda'))
             trans_bbox = bbox.transpose(1,2).contiguous()
 
             gloc, glabel = Variable(trans_bbox, requires_grad=False), \
