@@ -2,6 +2,7 @@
 SSD on Large images with a backbone of ResNet34 based on MLPerf-training single-stage-detector repo 
 ##Installation
 To install the environment please follow the instruction on [MLPerf-training single-stage-detector](https://github.com/mlperf/training/tree/master/single_stage_detector). The files in this repo replace the files in the ssd folder.
+The latest version of this repo reuquires [NVIDIA apex](https://github.com/NVIDIA/apex) as well. 
 
 ## Changes from original repo:
 1. Support training on any data size including images with uneven ratio e.g 1600x1200
@@ -25,3 +26,6 @@ To install the environment please follow the instruction on [MLPerf-training sin
    
   
 To resume training please use the ```--checkpoint``` flag so you can load your pre-trained 300x300 models and check results on a larger image size. 
+
+# Updates
+2/20/2019 added SyncBatchNorm from NVIDIA apex and fixed small bugs to make it run on pyt-10 as well
