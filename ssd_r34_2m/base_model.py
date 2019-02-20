@@ -10,6 +10,7 @@ from torch.autograd import Variable
 from collections import OrderedDict
 
 from torchvision.models.resnet import resnet18, resnet34, resnet50
+import apex
 
 def _ModifyConvStrideDilation(conv, stride=(1, 1), padding=None):
     conv.stride = stride
@@ -128,7 +129,8 @@ def make_layers(cfg, batch_norm=False):
         else:
             conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
             if batch_norm:
-                layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
+                layers += [conv2d, apex.parallel.SyncBatchNorm(v), nn.ReLU(inplace=True)]
+                #layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
             else:
                 layers += [conv2d, nn.ReLU(inplace=True)]
             in_channels = v
