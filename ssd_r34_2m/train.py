@@ -39,6 +39,8 @@ def parse_args():
                         help='path to model checkpoint file')
     parser.add_argument('--no-save', action='store_true',
                         help='save model checkpoints')
+    parser.add_argument('--save-path', '-d', type=str, default='./models',
+                        help='path to saved models files')                        
     parser.add_argument('--evaluation', nargs='*', type=int,
                         default=[1000,10000, 40000, 80000, 120000, 160000, 180000, 200000, 220000, 240000],
                         help='iterations at which to evaluate')
@@ -249,7 +251,7 @@ def train_mlperf_coco(args):
                     print("saving model...")
                     module = ssd_r34.module if len(args.device_ids)>1 else ssd_r34
                     torch.save({"model" : module.state_dict(), "label_map": train_coco.label_info},
-                                "./models/iter_{}.pt".format(iter_num))
+                                args.save_path+"/iter_{}.pt".format(iter_num))
                 if coco_eval(ssd_r34, val_coco, cocoGt, encoder, inv_map, args.threshold,args.device_ids):
                     return
 

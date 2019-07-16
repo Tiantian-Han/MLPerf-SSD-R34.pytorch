@@ -10,22 +10,19 @@ To install the environment please follow the instruction on [MLPerf-training sin
 3. Support different strides from command line - this is a list of 6 numbers: default [1,1,2,2,2,1]. The idea is to control the number of anchors 
 3. Removed hard coded steps\feature maps sizes 
 
-## Experiments (TO DO):
-1. Train 1400x1400 images on 8 GPUs with batch of 32 with the diffult anchors 
+## Experiments:
+1. To train any model you need to specifiy the image size  the batch size (so it ould fit into your memory) and the strides which define the number of anchors. For instance 
    ```
-   python train.py --device-ids 0 1 2 3 4 5 6 7
+   python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 2 2 2 2 1 1 --batch-size 32 --image-size 800 1200
    ```
-2. Train of 1400x1400 with smaller feature maps size by changing the strides - this would results with less anchors.
+2. The training of the final [MLPerf inference V0.5 ResNet34-SSD model](https://zenodo.org/record/3236545#.XS4ibOhKiUk) was done in three stages: train for 300x300,700x700,1200x1200. To reproduce the results please run the follwing lines: 
    ```
-   python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 4 4 2 2 2 1
-   ```
-3. Train on images of size 1600x1200 (asspect ratio would need to be adjusted - line 101 in train.py)
-   ```
-   python train.py --device-ids 0 1 2 3 4 5 6 7 --image_size 1600 1200
-   ```
-   
+   python train.py --device-ids 0 --image-size 300 300 --save-path models_300
+   python train.py --device-ids 0 1 2 3 --image-size 700 700 --save-path models_700 --checkpoint ./models_300/iter_24000
+   python train.py --device-ids 0 1 2 3 4 5 6 7 --image-size 1200 1200 --strides 3 3 2 2 2 2 --batch-size 32 --save-path models_1200 --checkpoint ./models_700/iter_24000
+   ```   
   
-To resume training please use the ```--checkpoint``` flag so you can load your pre-trained 300x300 models and check results on a larger image size. 
+Where ```--checkpoint``` flag is used to resume from pre-trained checkpoint.
 
 # Updates
 2/20/2019 added SyncBatchNorm from NVIDIA apex and fixed small bugs to make it run on pyt-10 as well
