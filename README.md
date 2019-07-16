@@ -15,7 +15,7 @@ To install the environment please follow the instruction on [MLPerf-training sin
    ```
    python train.py --device-ids 0 1 2 3 4 5 6 7 --strides 2 2 2 2 1 1 --batch-size 32 --image-size 800 1200
    ```
-2. The training of the final [MLPerf inference V0.5 ResNet34-SSD model](https://zenodo.org/record/3236545#.XS4ibOhKiUk) was done in three stages: train for 300x300,700x700,1200x1200. To reproduce the results please run the follwing lines: 
+2. The training of the final [MLPerf inference V0.5 ResNet34-SSD model](https://zenodo.org/record/3236545#.XS4ibOhKiUk) was done in three stages where in each step we increased the image-size and loaded resumed from previous checkpoint (probably this regime is suboptimal). To reproduce the results please run the follwing lines: 
    ```
    python train.py --device-ids 0 --image-size 300 300 --save-path models_300
    python train.py --device-ids 0 1 2 3 --image-size 700 700 --save-path models_700 --checkpoint ./models_300/iter_24000
